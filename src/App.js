@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Actions from './components/Actions';
 import SidebarList from './components/SidebarList';
+import Loader from './components/Loader';
 import requestData from './transport';
 import { DEFAULT_SORT } from './const';
 import './App.css';
@@ -42,9 +43,8 @@ export default () => {
 
   return (
     <div className="App">
-      {
-        isLoading ? 'Loading...' : (
-          <div className="sidebar">
+      <Loader isLoading={isLoading}>
+        <div className="sidebar">
               <div className="sidebar-header">
                 <h1>Reports {data.length}</h1>
                 <Actions { ...{ isOpen, setIsOpen, getData }} />
@@ -62,8 +62,7 @@ export default () => {
                 : <></>
               }
           </div>
-        )
-      }
+      </Loader>
     </div>
   );
 }
